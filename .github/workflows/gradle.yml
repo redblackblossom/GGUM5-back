@@ -46,6 +46,11 @@ jobs:
     #
     # - name: Build with Gradle 8.9
     #   run: gradle build
+    - name: upload jar file
+      uses: actions/upload-artifact@v3
+      with:
+        name: catspot
+        path: ./build/libs/*.jar
 
   dependency-submission:
 
@@ -66,11 +71,6 @@ jobs:
     - name: Generate and submit dependency graph
       uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
-    - name: upload jar file
-      uses: actions/upload-artifact@v3
-      with:
-        name: catspot
-        path: build/libs/*.jar
 
   deploy:
     needs: build
