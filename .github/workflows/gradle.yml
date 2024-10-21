@@ -67,7 +67,7 @@ jobs:
       uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
     - name: upload jar file
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: catspot
         path: build/libs/*.jar
@@ -77,7 +77,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download jar file
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: catspot
 
