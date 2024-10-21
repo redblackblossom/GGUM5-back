@@ -90,4 +90,4 @@ jobs:
         run: scp -o StrictHostKeyChecking=no *.jar  ubuntu@${{ secrets.WAS_IP }}:/home/ubuntu/app
 
       - name: ssh command
-        run: ssh ubuntu@${{ secrets.WAS_IP }} "sudo nohup ~/app/script.sh > ~/app/nohup.log 2>&1 &"
+        run: ssh ubuntu@${{ secrets.WAS_IP }} "nohup ~/app/script.sh > ~/app/nohup.log 2>&1 &"
