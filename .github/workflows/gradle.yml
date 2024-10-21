@@ -87,7 +87,7 @@ jobs:
           ssh-private-key: ${{ secrets.WAS_RSA_SECRETE }}
 
       - name: scp transfer
-        run: scp *.jar  ubuntu@${{ secrets.WAS_IP }}:/home/ubuntu/app
+        run: scp -o StrictHostKeyChecking=no *.jar  ubuntu@${{ secrets.WAS_IP }}:/home/ubuntu/app
 
       - name: ssh command
         run: ssh ubuntu@${{ secrets.WAS_IP }} "sudo nohup ~/app/script.sh &"
