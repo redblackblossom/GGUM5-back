@@ -33,6 +33,16 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
+      #applcation.properties 파일 주입
+    - name: Inject application.properties
+      run: |
+        cd ./src/main
+        mkdir -p resources
+        cd ./resources
+        touch ./application.properties
+        echo "${{ secrets.APPLICATION }}" >> ./application.properties
+
+
     - name: Build with Gradle Wrapper
       run: ./gradlew build -x test  #의존성 테스트를 제외한 빌드
 
