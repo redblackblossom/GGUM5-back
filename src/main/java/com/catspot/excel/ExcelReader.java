@@ -77,7 +77,7 @@ public class ExcelReader {
     private TimeTable timeTableBuilder(Schedule s, String name ,Classroom classroom, SessionTime sessionTime) {
         TimeTable timeTable = TimeTable.builder()
                 .day(s.getDay())
-                .classroom_name(name)
+                .courseName(name)
                 .classroom(classroom)
                 .sessionTime(sessionTime)
                 .build();
