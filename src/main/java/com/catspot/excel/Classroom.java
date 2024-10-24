@@ -15,7 +15,6 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer classroomNumber = null;
-    private String classroomName = null;
     private String buildingName = null;
 
     public Classroom(String str) {
@@ -25,8 +24,6 @@ public class Classroom {
             this.buildingName = str;
             return;
         }
-
-        this.classroomName = str;
 
         this.classroomNumber = Integer.parseInt(str.substring(str.length()-3));
 

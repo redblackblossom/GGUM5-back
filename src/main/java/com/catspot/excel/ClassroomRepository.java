@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface ClassroomRepository extends JpaRepository<Classroom, Long> {
-    Optional<Classroom> findByClassroomName(String classroomName);
+    Optional<Classroom> findByBuildingNameAndClassroomNumber(String buildingName, Integer classroomNumber);
 }

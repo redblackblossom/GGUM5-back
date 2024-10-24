@@ -63,7 +63,7 @@ public class ExcelReader {
     }
 
     private Optional<Classroom> getClassroom(Schedule s) {
-        Optional<Classroom> existingClassroom = classroomRepository.findByClassroomName(s.getLocation().getClassroomName());
+        Optional<Classroom> existingClassroom = classroomRepository.findByBuildingNameAndClassroomNumber(s.getLocation().getBuildingName(), s.getLocation().getClassroomNumber());
         return existingClassroom;
     }
 
