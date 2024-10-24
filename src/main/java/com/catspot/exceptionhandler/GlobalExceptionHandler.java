@@ -1,14 +1,16 @@
 package com.catspot.exceptionhandler;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler{
 
+    // 커스텀 예외 처리
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ErrorResponse> CustomExceptionHandler(CustomException ex){
         ErrorCode errorCode = ex.getErrorCode();
@@ -19,7 +21,7 @@ public class GlobalExceptionHandler{
         return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
     }
 
-
+    // 전체적인 예외 처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> AllExceptionHandler(Exception ex){
         ErrorResponse errorResponse = new ErrorResponse(

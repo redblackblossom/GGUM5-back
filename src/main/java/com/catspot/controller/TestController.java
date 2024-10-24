@@ -24,12 +24,11 @@ public class TestController {
 
     @GetMapping("/exception1")
     public String test3() {
-        // 예외 발생
         throw new RuntimeException("테스트 예외 발생");
     }
     @GetMapping("/exception2")
     public String test4() {
-        // 예외 발생
         throw new CustomException(CommonErrorCode.INTERNAL_SERVER_ERROR);
     }
+
 }
