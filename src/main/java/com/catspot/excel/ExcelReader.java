@@ -1,5 +1,11 @@
 package com.catspot.excel;
 
+import com.catspot.entity.Classroom;
+import com.catspot.entity.SessionTime;
+import com.catspot.entity.TimeTable;
+import com.catspot.repository.ClassroomRepository;
+import com.catspot.repository.SessionTimeRepository;
+import com.catspot.repository.TimeTableRepository;
 import lombok.AllArgsConstructor;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Service;

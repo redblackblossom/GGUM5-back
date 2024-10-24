@@ -1,5 +1,6 @@
-package com.catspot.excel;
+package com.catspot.repository;
 
+import com.catspot.entity.Classroom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

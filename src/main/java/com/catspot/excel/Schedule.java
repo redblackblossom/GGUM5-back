@@ -1,5 +1,6 @@
 package com.catspot.excel;
 
+import com.catspot.entity.Classroom;
 import lombok.Data;
 
 @Data

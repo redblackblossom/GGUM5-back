@@ -1,4 +1,4 @@
-package com.catspot.excel;
+package com.catspot.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
