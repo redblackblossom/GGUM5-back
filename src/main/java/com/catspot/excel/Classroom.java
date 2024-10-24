@@ -1,19 +1,32 @@
 package com.catspot.excel;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 @Data
+@NoArgsConstructor
 public class Classroom {
-    private String classroom_name;
-    private Integer classroom_number;
-    private String building_name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Integer classroomNumber;
+    private String classroomName;
+    private String buildingName;
 
     public Classroom(String str) {
-        this.classroom_name = str;
+        this.classroomName = str;
 
-        this.classroom_number = Integer.parseInt(str.substring(str.length()-3));
+        this.classroomNumber = Integer.parseInt(str.substring(str.length()-3));
 
-        this.building_name = str.substring(0,str.length()-3);
+        this.buildingName = str.substring(0,str.length()-3);
     }
+
+    @OneToMany(mappedBy = "classroom")
+    private List<TimeTable> timeTables = new ArrayList<>();
 
 }
