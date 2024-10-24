@@ -14,7 +14,7 @@ public class TimeTable {
     private Long id;
     @Column(name = "class_day")
     private String day;
-    private String classroom_name;
+    private String courseName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "session_time_id")
