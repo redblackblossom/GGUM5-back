@@ -18,4 +18,13 @@ class ExcelParserTest {
             System.out.println("r = " + r);
         }
     }
+
+    @Test
+    public void parserTest1(){
+        ExcelParser ep = new ExcelParser();
+        List<Schedule> ret = ep.parse("수1(), 금1~2(N411)");
+        for (Schedule r : ret) {
+            System.out.println("r = " + r);
+        }
+    }
 }

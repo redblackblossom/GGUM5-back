@@ -14,12 +14,15 @@ public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer classroomNumber;
-    private String classroomName;
-    private String buildingName;
+    private Integer classroomNumber = null;
+    private String classroomName = null;
+    private String buildingName = null;
 
     public Classroom(String str) {
+        if(str.isEmpty()) return;
+
         this.classroomName = str;
+        if(!Character.isDigit(str.charAt(str.length() - 1))) return;
 
         this.classroomNumber = Integer.parseInt(str.substring(str.length()-3));
 
