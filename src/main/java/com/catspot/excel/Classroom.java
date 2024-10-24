@@ -21,8 +21,12 @@ public class Classroom {
     public Classroom(String str) {
         if(str.isEmpty()) return;
 
+        if(!Character.isDigit(str.charAt(str.length() - 1))){
+            this.buildingName = str;
+            return;
+        }
+
         this.classroomName = str;
-        if(!Character.isDigit(str.charAt(str.length() - 1))) return;
 
         this.classroomNumber = Integer.parseInt(str.substring(str.length()-3));
 
