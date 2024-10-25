@@ -1,4 +1,4 @@
-package com.catspot.crawler;
+package com.catspot.studyplace;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,10 +18,4 @@ public class StudyPlace {
     private Integer allSeats;
     private Integer useSeats;
     private Integer restSeats;
-
-    @Override
-    public String toString() {
-        return "placeIdx=" + placeIdx + ", placeName=" + placeName + ", url=" + url +
-                ", allSeats=" + allSeats + ", useSeats=" + useSeats + ", restSeats=" + restSeats;
-    }
 }

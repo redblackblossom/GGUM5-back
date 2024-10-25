@@ -1,5 +1,7 @@
 package com.catspot.crawler;
 
+import com.catspot.studyplace.StudyPlace;
+import com.catspot.studyplace.StudyPlaceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
