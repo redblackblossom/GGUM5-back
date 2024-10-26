@@ -13,12 +13,13 @@ import java.util.List;
 @Component
 @AllArgsConstructor
 public class CrawlerScheduler {
+    private final LibraryCrawler libraryCrawler;
     private final StudyPlaceRepository studyPlaceRepository;
 
     @Transactional
     @Scheduled(fixedRate = 60000)
     public void crawl() {
-        List<StudyPlace> places = LibraryCrawler.getData();
+        List<StudyPlace> places = libraryCrawler.getData();
         List<StudyPlace> studyPlacesToSave = new ArrayList<>();
 
         if (places.isEmpty()) {
