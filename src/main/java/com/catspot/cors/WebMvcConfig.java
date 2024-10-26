@@ -9,7 +9,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedMethods("GET")
+                .allowedMethods("GET", "POST")
                 .allowedOrigins("http://localhost:5173", "https://catspot-dev.web.app");
     }
 }
