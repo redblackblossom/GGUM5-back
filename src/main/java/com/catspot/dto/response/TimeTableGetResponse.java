@@ -1,4 +1,4 @@
-package com.catspot.dto;
+package com.catspot.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

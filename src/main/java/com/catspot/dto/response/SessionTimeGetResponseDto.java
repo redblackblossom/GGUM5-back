@@ -1,4 +1,4 @@
-package com.catspot.dto;
+package com.catspot.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,6 +6,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class SessionTimeGetResponseDto {
-    private String courseName;
     private String time;
+    private String subjectName;
 }
