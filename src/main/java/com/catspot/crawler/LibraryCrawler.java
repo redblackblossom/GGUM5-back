@@ -1,6 +1,10 @@
 package com.catspot.crawler;
 
+import com.catspot.exceptionhandler.CommonErrorCode;
+import com.catspot.exceptionhandler.CustomException;
+import com.catspot.exceptionhandler.ErrorCode;
 import com.catspot.studyplace.StudyPlace;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class LibraryCrawler {
     private static final String baseUrl = "http://203.229.203.240/8080";
     private static final String tableUrl = "/Domian5_jythh.asp";
@@ -44,9 +49,10 @@ public class LibraryCrawler {
                 data.add(studyPlace);
             }
 
-            if (data.isEmpty()) throw new IOException();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        } catch (Exception e) {
+            log.error("크롤링에 실패했습니다.");
+            data = new ArrayList<>();
         }
         return data;
     }

@@ -21,6 +21,11 @@ public class CrawlerScheduler {
         List<StudyPlace> places = LibraryCrawler.getData();
         List<StudyPlace> studyPlacesToSave = new ArrayList<>();
 
+        if (places.isEmpty()) {
+            studyPlaceRepository.deleteAll();
+            return;
+        }
+
         for (StudyPlace place : places) {
             StudyPlace studyPlace = studyPlaceRepository.findById(place.getPlaceIdx()).orElseGet(() -> place);
 
