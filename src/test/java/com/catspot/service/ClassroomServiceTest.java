@@ -1,6 +1,9 @@
 package com.catspot.service;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import com.catspot.dto.response.ClassroomGetResponseDto;
+import com.catspot.exceptionhandler.CustomException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,5 +34,17 @@ class ClassroomServiceTest {
         for (int classroomNumber : classroomList.getClassrooms()) {
             System.out.println("수업중인 강의실 = " + classroomNumber);
         }
+    }
+
+    @Test
+    void InvalidFloor() {
+        String buildingName = "A";
+        int floor = -1; // 유효하지 않은 층 수
+        String day = "Monday";
+        int hour = 10;
+
+        assertThrows(CustomException.class, () -> {
+            classroomService.getClassroomList(buildingName, floor, day, hour);
+        });
     }
 }
