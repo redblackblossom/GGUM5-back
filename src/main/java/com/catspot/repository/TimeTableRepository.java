@@ -13,6 +13,7 @@ public interface TimeTableRepository extends JpaRepository<TimeTable, Long> {
             "JOIN FETCH t.sessionTime s " +
             "WHERE c.buildingName = :buildingName " +
             "AND c.classroomNumber = :classroomNumber " +
-            "AND t.day = :day")
+            "AND t.day = :day " +
+            "ORDER BY s.time")
     List<TimeTable> findByClassroomName(@Param("buildingName") String buildingName, @Param("classroomNumber") int classroomNumber, @Param("day") String day);
 }
