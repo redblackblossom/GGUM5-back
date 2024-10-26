@@ -3,6 +3,8 @@ package com.catspot.excel;
 import com.catspot.entity.Classroom;
 import com.catspot.entity.SessionTime;
 import com.catspot.entity.TimeTable;
+import com.catspot.exceptionhandler.CommonErrorCode;
+import com.catspot.exceptionhandler.CustomException;
 import com.catspot.repository.ClassroomRepository;
 import com.catspot.repository.SessionTimeRepository;
 import com.catspot.repository.TimeTableRepository;
@@ -24,47 +26,37 @@ public class ExcelReader {
     private final ClassroomRepository classroomRepository;
     private final TimeTableRepository timeTableRepository;
     private final SessionTimeRepository sessionTimeRepository;
-    public void importClassrooms(InputStream inputStream) {
-        try {
-            Workbook workbook = WorkbookFactory.create(inputStream);
-            Sheet sheet = workbook.getSheetAt(0);
-            for (int rowIndex = 2; rowIndex < sheet.getLastRowNum(); rowIndex++) {
-                Row row = sheet.getRow(rowIndex);
-                if (row == null) continue;
-                // 교과목명
-                Cell nameCell = row.getCell(NAMECELLNUMBER);
 
-                // 요일및교시(강의실)
-                Cell scheduleCell = row.getCell(SCHEDULECELLNUMBER);
+    public void importClassrooms(Workbook workbook) {
 
-                if (scheduleCell == null || scheduleCell.getStringCellValue().trim().isEmpty() ||
-                        nameCell == null || nameCell.getStringCellValue().trim().isEmpty()) {
-                    continue;
-                }
-                String schedule = scheduleCell.getStringCellValue();
-                String name = nameCell.getStringCellValue();
+        Sheet sheet = workbook.getSheetAt(0);
+        for (int rowIndex = 2; rowIndex < sheet.getLastRowNum(); rowIndex++) {
+            Row row = sheet.getRow(rowIndex);
+            if (row == null) continue;
+            // 교과목명
+            String name = row.getCell(NAMECELLNUMBER).getStringCellValue().trim();
 
-                List<Schedule> scheduleList = excelParser.parse(schedule);
+            // 요일및교시(강의실)
+            String schedule = row.getCell(SCHEDULECELLNUMBER).getStringCellValue().trim();
 
-                for (Schedule s : scheduleList) {
-                    Optional<Classroom> existingClassroom = getClassroom(s);
+            if (name.isEmpty() || schedule.isEmpty()) continue;
 
-                    Classroom classroom;
-                    if (existingClassroom.isPresent()) {
-                        classroom = existingClassroom.get();
-                    } else {
-                        classroom = classroomRepository.save(s.getLocation());
-                    }
+            saveColumnData(excelParser.parse(schedule), name);
+        }
 
-                    SessionTime sessionTime = sessionTimeBuilder(s);
-                    sessionTimeRepository.save(sessionTime);
+    }
 
-                    TimeTable timeTable = timeTableBuilder(s, name ,classroom, sessionTime);
-                    timeTableRepository.save(timeTable);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void saveColumnData(List<Schedule> scheduleList, String name){
+        for (Schedule s : scheduleList) {
+            Optional<Classroom> existingClassroom = getClassroom(s);
+
+            Classroom classroom = existingClassroom.orElseGet(() -> classroomRepository.save(s.getLocation()));;
+
+            SessionTime sessionTime = sessionTimeBuilder(s);
+            sessionTimeRepository.save(sessionTime);
+
+            TimeTable timeTable = timeTableBuilder(s, name ,classroom, sessionTime);
+            timeTableRepository.save(timeTable);
         }
     }
 
